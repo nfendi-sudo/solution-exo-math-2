@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحل الشامل - الدوال الأسية واللوغاريتمية</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-blue: #1565c0;   /* أزرق ملكي */
+            --dark-blue: #0d47a1;      /* أزرق داكن */
+            --light-blue: #e3f2fd;     /* خلفية خفيفة */
+            --text-black: #212121;
+            --accent-gold: #fbc02d;    /* للتنقيط */
+            --border-color: #bbdefb;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f5f5f5;
+            color: var(--text-black);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            border-top: 8px solid var(--primary-blue);
+        }
+
+        /* الترويسة */
+        header {
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* تنسيق التمارين */
+        .exercise-box {
+            margin: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .exercise-header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-points {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* جدول الحلول */
+        .solution-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .solution-table th, .solution-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        .solution-table th {
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .col-answer { width: 75%; }
+        .col-mark { width: 10%; text-align: center; color: var(--accent-gold); font-weight: bold; font-family: 'Amiri'; font-size: 1.2rem; }
+        .col-total { width: 15%; text-align: center; font-weight: bold; background: #fafafa; }
+
+        /* تنسيق الرياضيات والنص */
+        .math-block {
+            font-family: 'Times New Roman', serif;
+            direction: ltr;
+            text-align: left;
+            background: #f9f9f9;
+            padding: 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 5px 0;
+            border-left: 3px solid var(--primary-blue);
+        }
+
+        .keyword {
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .step-title {
+            text-decoration: underline;
+            margin-bottom: 5px;
+            display: block;
+            color: #444;
+            font-weight: bold;
+        }
+
+        /* زر الطباعة */
+        .print-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 12px;
+            background-color: var(--dark-blue);
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .print-btn:hover { background-color: var(--primary-blue); }
+
+        @media print {
+            .print-btn { display: none; }
+            body { padding: 0; background: white; }
+            .container { box-shadow: none; border: none; width: 100%; max-width: 100%; margin: 0; }
+            .exercise-box { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>التصحيح النموذجي المفصل</h1>
+        <p>سلسلة الدوال الأسية واللوغاريتمية | السنة الثالثة ثانوي</p>
+    </header>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            <span>التمرين الأول: الدالة الأسية (دراسة ومناقشة)</span>
+            <span class="total-points">05 نقاط</span>
+        </div>
+        <table class="solution-table">
+            <tr>
+                <td class="col-answer">
+                    <span class="step-title">الجزء الأول (الدالة g):</span>
+                    1. <strong>النهايات:</strong><br>
+                    - عند \( -\infty \): \( \lim_{x \to -\infty} (x-1)e^x + 1 = 0 + 1 = 1 \) (لأن \( xe^x \to 0 \)).<br>
+                    - عند \( +\infty \): \( \lim_{x \to +\infty} (x-1)e^x + 1 = +\infty \).<br>
+                    2. <strong>اتجاه التغير:</strong> \( g'(x) = 1.e^x + (x-1)e^x = xe^x \).<br>
+                    - إشارة \( g' \) من إشارة \( x \). متناقصة على \( ]-\infty, 0] \) ومتزايدة على \( [0, +\infty[ \).<br>
+                    - \( g(0) = -1.e^0 + 1 = 0 \).<br>
+                    3. <strong>الإشارة:</strong> بما أن \( g(0)=0 \) هي قيمة حدية صغرى، فإن \( g(x) \ge 0 \) دومًا.
+                </td>
+                <td class="col-mark">
+                    0.5<br>
+                    0.5<br>
+                    0.5
+                </td>
+                <td class="col-total">1.5</td>
+            </tr>
+            <tr>
+                <td class="col-answer">
+                    <span class="step-title">الجزء الثاني (الدالة f):</span>
+                    1. <strong>المقارب المائل:</strong> \( \lim_{x \to -\infty} [f(x) - x] = \lim (x-2)e^x = 0 \). إذن \( y=x \) مقارب مائل بجوار \( -\infty \).<br>
+                    2. <strong>الوضعية:</strong> ندرس إشارة الفرق \( (x-2)e^x \).<br>
+                    - تحت المقارب في \( ]-\infty, 2[ \)، ويقطعه في \( x=2 \)، وفوقه في \( ]2, +\infty[ \).<br>
+                    3. <strong>المشتقة:</strong> \( f'(x) = 1 + [1.e^x + (x-2)e^x] = 1 + (x-1)e^x = g(x) \).<br>
+                    - بما أن \( g(x) \ge 0 \)، فالدالة \( f \) <span class="keyword">متزايدة تماماً</span>.<br>
+                    4. <strong>نقطة الانعطاف:</strong> \( f''(x) = g'(x) = xe^x \). تنعدم عند \( 0 \) وتغير إشارتها. النقطة \( \omega(0, f(0)=-2) \).<br>
+                    5. <strong>المناقشة البيانية \( f(x) = x+m \):</strong> هي تقاطع مع مستقيمات توازي المقارب المائل \( y=x \).<br>
+                    - \( m \) يمثل ترتيب نقطة التقاطع مع محور التراتيب.<br>
+                    - حل وحيد دائمًا لأن الدالة متزايدة ومستمرة من \( -\infty \) إلى \( +\infty \).
+                </td>
+                <td class="col-mark">
+                    0.5<br>
+                    0.5<br>
+                    1.0<br>
+                    0.5<br>
+                    1.0
+                </td>
+                <td class="col-total">3.5</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            <span>التمرين الثاني: الدالة اللوغاريتمية</span>
+            <span class="total-points">04.5 نقاط</span>
+        </div>
+        <table class="solution-table">
+            <tr>
+                <td class="col-answer">
+                    <span class="step-title">الجزء الأول (الدالة المساعدة):</span>
+                    - \( g'(x) = 2x - 1/x = (2x^2-1)/x \). تنعدم عند \( 1/\sqrt{2} \).<br>
+                    - القيمة الحدية الصغرى موجبة (بالحساب التقريبي)، إذن \( g(x) > 0 \) دوماً.
+                </td>
+                <td class="col-mark">1.0</td>
+                <td class="col-total">1.0</td>
+            </tr>
+            <tr>
+                <td class="col-answer">
+                    <span class="step-title">الجزء الثاني (الدالة f):</span>
+                    1. <strong>النهايات:</strong> عند \( 0^+ \) هي \( -\infty \) (تفسير: \( x=0 \) مقارب عمودي). عند \( +\infty \) هي \( +\infty \).<br>
+                    2. <strong>المقارب المائل:</strong> \( \lim_{x \to +\infty} \frac{\ln x}{x} = 0 \). إذن \( y=x+1 \) مقارب.<br>
+                    3. <strong>الوضعية:</strong> إشارة \( \ln x \). تحت المقارب في \( ]0, 1[ \)، يقطع في \( 1 \)، فوق في \( ]1, +\infty[ \).<br>
+                    4. <strong>المشتقة:</strong> \( f'(x) = 1 + \frac{1(x) - 1(\ln x)}{x^2} = \frac{x^2+1-\ln x}{x^2} = \frac{g(x)}{x^2} > 0 \).<br>
+                    - الدالة متزايدة تماماً.<br>
+                    5. <strong>مبرهنة القيم المتوسطة:</strong> \( f(0.2) \approx -0.4 \)، \( f(0.3) \approx +0.09 \). الجداء سالب، الحل وحيد.
+                </td>
+                <td class="col-mark">
+                    0.5<br>
+                    0.5<br>
+                    0.5<br>
+                    1.0<br>
+                    1.0
+                </td>
+                <td class="col-total">3.5</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            <span>التمرين الثالث: التناظر والمماس</span>
+            <span class="total-points">03.5 نقاط</span>
+        </div>
+        <table class="solution-table">
+            <tr>
+                <td class="col-answer">
+                    1. <strong>فردية الدالة:</strong> \( f(-x) = \frac{e^{-x}-1}{e^{-x}+1} = \frac{1/e^x - 1}{1/e^x + 1} = \frac{1-e^x}{1+e^x} = -f(x) \).<br>
+                    - التفسير: المنحنى متناظر بالنسبة للمبدأ \( O \).<br>
+                    2. <strong>النهايات:</strong> عند \( -\infty \) النتيجة \( -1 \)، عند \( +\infty \) النتيجة \( 1 \). (مقإربان: \( y=1, y=-1 \)).<br>
+                    3. <strong>التغيرات:</strong> \( f'(x) = \frac{2e^x}{(e^x+1)^2} > 0 \). متزايدة تماماً.<br>
+                    4. <strong>معادلة المماس عند 0:</strong> \( y = f'(0)(x-0) + f(0) = \frac{2}{4}x + 0 \Rightarrow y = \frac{1}{2}x \).<br>
+                    5. <strong>الوضعية:</strong> دراسة إشارة \( d(x) = f(x) - \frac{1}{2}x \). (يمكن استعمال المشتقة الثانية لها أو الملاحظة). يقطع في المبدأ.
+                </td>
+                <td class="col-mark">
+                    0.5<br>
+                    0.5<br>
+                    1.0<br>
+                    0.5<br>
+                    1.0
+                </td>
+                <td class="col-total">3.5</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            <span>التمرين الرابع: لوغاريتم القيمة المطلقة</span>
+            <span class="total-points">03 نقاط</span>
+        </div>
+        <table class="solution-table">
+            <tr>
+                <td class="col-answer">
+                    1. <strong>التعريف:</strong> \( x^2-1 \ne 0 \Rightarrow x \ne 1, -1 \). \( D_f = \mathbb{R} - \{-1, 1\} \).<br>
+                    - النهايات عند \( \pm 1 \) هي \( -\infty \). عند \( \pm \infty \) هي \( +\infty \).<br>
+                    2. <strong>الشفعية:</strong> زوجية لأن \( (-x)^2 = x^2 \). التناظر بالنسبة لمحور التراتيب.<br>
+                    3. <strong>التغيرات على \( ]1, +\infty[ \):</strong> \( f'(x) = \frac{2x}{x^2-1} \). موجبة، الدالة متزايدة.<br>
+                    4. <strong>المناقشة \( |x^2-1| = e^m \):</strong> تكافئ \( \ln|x^2-1| = m \)، أي \( f(x)=m \).<br>
+                    - مناقشة أفقية. حلان، أربع حلول، إلخ حسب الرسم.
+                </td>
+                <td class="col-mark">
+                    1.0<br>
+                    0.5<br>
+                    0.5<br>
+                    1.0
+                </td>
+                <td class="col-total">03</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            <span>التمرين الخامس: القيم المتوسطة والحصر</span>
+            <span class="total-points">04 نقاط</span>
+        </div>
+        <table class="solution-table">
+            <tr>
+                <td class="col-answer">
+                    1. <strong>مبرهنة القيم المتوسطة:</strong> نضع \( h(x)=e^x+x+1 \). متزايدة. \( h(-1.28) < 0 \) و \( h(-1.27) > 0 \).<br>
+                    2. <strong>النهايات والمقارب:</strong> عند \( +\infty \)، \( f(x) \approx x \). الفرق \( x[\frac{e^x}{e^x+1} - 1] = \frac{-x}{e^x+1} \to 0 \).<br>
+                    3. <strong>المشتقة:</strong> حساب مشتقة كسر، توحيد المقامات للوصول للعبارة المطلوبة.<br>
+                    4. <strong>الحصر:</strong> لدينا \( e^\alpha + \alpha + 1 = 0 \Rightarrow e^\alpha = -(\alpha+1) \).<br>
+                    - نعوض في العبارة: \( f(\alpha) = \frac{\alpha(-(\alpha+1))}{-(\alpha+1)+1} = \frac{-\alpha(\alpha+1)}{-\alpha} = \alpha+1 \).<br>
+                    - الحصر: نضيف 1 لحصر \( \alpha \). النتيجة \( -0.28 < f(\alpha) < -0.27 \).
+                </td>
+                <td class="col-mark">
+                    1.0<br>
+                    1.0<br>
+                    1.0<br>
+                    1.0
+                </td>
+                <td class="col-total">04</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            <span>التمرين السادس: نقطة الانعطاف والمناقشة الدورانية</span>
+            <span class="total-points">05 نقاط</span>
+        </div>
+        <table class="solution-table">
+            <tr>
+                <td class="col-answer">
+                    1. <strong>الدراسة:</strong> النهايات \( -2 \) عند \( -\infty \) و \( -\infty \) عند \( +\infty \). المشتقة \( f'(x) = (1-x)e^x \). تنعدم عند 1.<br>
+                    2. <strong>التقاطع:</strong> \( f(0) = 2(1)-2=0 \). النقطة الأخرى بيانيا أو بالحساب التقريبي.<br>
+                    3. <strong>نقطة الانعطاف:</strong> \( f''(x) = -xe^x \). تنعدم عند 0 وتغير الإشارة.<br>
+                    4. <strong>المماس عند O:</strong> \( y = f'(0)x + f(0) = 1.x + 0 \Rightarrow y=x \).<br>
+                    5. <strong>المناقشة الدورانية:</strong> المعادلة تكافئ \( f(x) = mx - 2 \).<br>
+                    - المستقيمات تمر بالنقطة الثابتة \( (0, -2) \). المناقشة تدور حول هذه النقطة.
+                </td>
+                <td class="col-mark">
+                    1.0<br>
+                    0.5<br>
+                    1.0<br>
+                    0.5<br>
+                    2.0
+                </td>
+                <td class="col-total">05</td>
+            </tr>
+        </table>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">طباعة الحل (PDF)</button>
+</div>
+
+</body>
+</html>
